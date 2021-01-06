@@ -1,15 +1,10 @@
 const dotenv=require('dotenv')
-const express = require('express')
-const app=express()
-const ejs=require('ejs')
-const path=require('path')
-const expressLayout=require('express-ejs-layouts')
 const mongoose = require('mongoose');
-const flash=require('express-flash')
 const session = require('express-session')
 const MongoDBstore=require('connect-mongo')(session)
 
 dotenv.config({ path: './config.env' })
+const app = require('./server');
 
 const DB = process.env.DB.replace(
     '<password>',
@@ -41,29 +36,7 @@ mongoose
     saveUninitialized: false,
     cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }))
-
-app.use(flash())
-  
-
-
-
-app.use(express.static('public'))
-app.use(express.json())
-
-app.use((req, res, next) => {
-    res.locals.session = req.session
-    res.locals.user = req.user
-    next()
-})
-
-app.use(expressLayout)
-app.set('views', path.join(__dirname, '/resources/views'))
-app.set('view engine', 'ejs')
-
-require('./routes/web')(app)
-
-const port = 3000;
+  const port = 3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
-module.exports=app
