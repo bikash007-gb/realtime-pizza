@@ -1,6 +1,6 @@
 import axios from 'axios'
 import Noty from 'noty' 
-import  initAdmin  from './admin'
+import {adminInit} from './admin'
 let addToCart = document.querySelectorAll('.add-to-cart')
 let cartCounter=document.querySelector('#cartCounter')
 
@@ -37,4 +37,3 @@ if(alertmsg){
     },2000)
     
 }
-initAdmin()

@@ -5,7 +5,6 @@ const orderController=require('../app/http/controllers/customers/orderController
 const AdminOderController=require('../app/http/controllers/admin/orderController')
 const guest = require('../app/http/middlewares/guest')
 const auth = require('../app/http/middlewares/auth')
-const admin = require('../app/http/middlewares/admin')
 function initRoutes(app){
     app.get('/',homeController().index)
     
@@ -26,6 +25,6 @@ function initRoutes(app){
     app.post('/orders',auth,orderController().store)
     app.get('/customer/orders',auth,orderController().index)
 
-    app.get('/admin/orders',admin,AdminOderController().index)
+    app.get('/admin/orders',auth,AdminOderController().index)
 }
 module.exports =initRoutes
