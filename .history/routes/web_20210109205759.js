@@ -26,9 +26,9 @@ function initRoutes(app){
 
     app.post('/orders',auth,orderController().store)
     app.get('/customer/orders',auth,orderController().index)
-    app.get('/customer/orders/:id',auth,orderController().show)
 
     app.get('/admin/orders',admin,AdminOderController().index)
-    app.post('/admin/order/status',admin,statusController().update)
+
+    app.get('/admin/order/status',admin,statusController().index)
 }
 module.exports =initRoutes

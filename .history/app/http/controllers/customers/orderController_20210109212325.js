@@ -29,8 +29,8 @@ function orderController(){
             res.render('customers/orders',{orders:orders,moment:moment})
         },
         async show(req, res){
-            const order=await Order.findById(req.params.id)
-            if(req.user._id.toString() === order.customerId.toString()){
+            const order=Order.findById(req.params.id)
+            if(req.user._id === order.customerId{
                 return res.render('customers/singleOrder',{order:order})
             }
             return res.redirect('/')

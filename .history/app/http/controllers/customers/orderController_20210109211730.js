@@ -29,7 +29,7 @@ function orderController(){
             res.render('customers/orders',{orders:orders,moment:moment})
         },
         async show(req, res){
-            const order=await Order.findById(req.params.id)
+            const order=Order.findById(req.params.id)
             if(req.user._id.toString() === order.customerId.toString()){
                 return res.render('customers/singleOrder',{order:order})
             }
