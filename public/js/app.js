@@ -1961,7 +1961,6 @@ if (alertmsg) {
   }, 2000);
 }
 
-(0,_admin__WEBPACK_IMPORTED_MODULE_3__.default)();
 var statuses = document.querySelectorAll('.status_line');
 var hiddenInput = document.querySelector('#hiddenInput');
 var order = hiddenInput ? hiddenInput.value : null;
