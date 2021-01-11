@@ -8,7 +8,7 @@ function statusController(){
                     return res.redirect('/admin/orders')
                 }
                 const eventEmitter=req.app.get('eventEmitter')
-                eventEmitter.emit('orderUpdated',{id:req.body.orderId,status:req.body.status})
+                eventEmitter.emit('orderUpdated',{id:req.body.orderId})
                 return res.redirect('/admin/orders')
             })
         }

@@ -78,7 +78,6 @@ if(order){
 
 let adminArea=window.location.pathname
 if (adminArea.includes('admin')){
-    initAdmin(socket)
     socket.emit('join','adminRoom')
 }
 

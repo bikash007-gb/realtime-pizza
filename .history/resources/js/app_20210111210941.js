@@ -75,18 +75,10 @@ let socket=io()
 if(order){
     socket.emit('join', `order_${order._id}`)
 }
-
-let adminArea=window.location.pathname
-if (adminArea.includes('admin')){
-    initAdmin(socket)
-    socket.emit('join','adminRoom')
-}
-
 socket.on('orderUpdated', (data) => {
     const updatedOrder = { ...order }
     updatedOrder.updatedAt = moment().format()
     updatedOrder.status = data.status
-    
     updateStatus(updatedOrder)
     new Noty({
         type: 'success',

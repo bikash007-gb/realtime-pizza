@@ -50,10 +50,6 @@ function updateStatus(order){
         status.classList.remove('step-completed')
         status.classList.remove('current')
     })
-    statuses.forEach((status) => {
-        status.classList.remove('step-completed')
-        status.classList.remove('current')
-    })
     let stepCompleted = true;
     statuses.forEach((status) => {
        let dataProp = status.dataset.status
@@ -75,23 +71,6 @@ let socket=io()
 if(order){
     socket.emit('join', `order_${order._id}`)
 }
-
-let adminArea=window.location.pathname
-if (adminArea.includes('admin')){
-    initAdmin(socket)
-    socket.emit('join','adminRoom')
-}
-
-socket.on('orderUpdated', (data) => {
-    const updatedOrder = { ...order }
-    updatedOrder.updatedAt = moment().format()
-    updatedOrder.status = data.status
-    
-    updateStatus(updatedOrder)
-    new Noty({
-        type: 'success',
-        timeout: 1000,
-        text: 'Order updated',
-        progressBar: false,
-    }).show();
+socket.on('orderUpdated',()=>{
+    const updatedOrder={...order}
 })

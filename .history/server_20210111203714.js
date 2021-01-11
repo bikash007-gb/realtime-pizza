@@ -38,10 +38,6 @@ mongoose
     mongooseConnection: connection,
     collection: 'sessions'
 })
-
-
-const eventEmitter=new Emitter()
-app.set('eventEmitter',eventEmitter)
   app.use(session({
     secret:process.env.COKIE_SECRET,
     resave: false,
@@ -88,10 +84,4 @@ io.on('connection',(socket) =>{
     //console.log(orderId)
      socket.join(orderId)
   })
-})
-eventEmitter.on('orderUpdated',(data)=>{
-  io.to(`order_${data.id}`).emit('orderUpdated',data)
-})
-eventEmitter.on('orderPlaced',(data)=>{
-  io.to('adminRoom').emit('orderPlaced',data)
 })
