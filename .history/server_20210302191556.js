@@ -41,7 +41,7 @@ mongoose
 
 
 const eventEmitter=new Emitter()
-
+app.set('eventEmitter',eventEmitter)
   app.use(session({
     secret:process.env.COKIE_SECRET,
     resave: false,
@@ -74,7 +74,7 @@ app.set('view engine', 'ejs')
 
 require('./routes/web')(app)
 
-const port = 3000;
+const port = process.env.PORT||3000;
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}...`);
 });
@@ -88,4 +88,10 @@ io.on('connection',(socket) =>{
     //console.log(orderId)
      socket.join(orderId)
   })
+})
+eventEmitter.on('orderUpdated',(data)=>{
+  io.to(`order_${data.id}`).emit('orderUpdated',data)
+})
+eventEmitter.on('orderPlaced',(data)=>{
+  io.to('adminRoom').emit('orderPlaced',data)
 })
